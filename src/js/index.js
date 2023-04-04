@@ -1,20 +1,37 @@
 import '../css/styles.css';
-import axios from 'axios';
+// import axios from 'axios';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const SEARCH_URL = 'https://pixabay.com/api/';
-const API_KEY = '35041126-c969f82855a4c8ea112aa3b64';
+// const SEARCH_URL = 'https://pixabay.com/api/';
+// const API_KEY = '35041126-c969f82855a4c8ea112aa3b64';
 
 const refs = {
-  form: document.querySelector('.search-form'),
+  form: document.querySelector('#search-form'),
   galleryContainer: document.querySelector('.gallery'),
+  loadBtn: document.querySelector('.load-more'),
 };
 
-refs.form.addEventListener('submit', onSubmit);
+refs.loadBtn.style.display = 'none';
 
-function onSubmit() {}
+refs.form.addEventListener('submit', onSubmit);
+refs.loadBtn.addEventListener('click', onClick);
+
+function onSubmit(event) {
+  event.preventDefault();
+  refs.gallery.innerHTML = '';
+  const name = event.target.value.trim();
+  if (name !== '') {
+    return queryImage(name);
+  }
+  refs.loadBtn.style.display = 'none';
+  return Notify.failure(
+    'Sorry, there are no images matching your search query. Please try again.'
+  );
+}
+
+function onClick() {}
 
 function renderGallery(images) {
   return images
