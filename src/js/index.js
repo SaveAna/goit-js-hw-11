@@ -82,7 +82,7 @@ function renderGallery(images) {
         comments,
         downloads,
       }) => {
-        `<a class="gallery__link" href="${largeImageURL}">
+        return `<a class="gallery__link" href="${largeImageURL}">
              <div class="photo-card">
                  <img src="${webformatURL}" alt="${tags}" loading="lazy" />
                  <div class="info">
