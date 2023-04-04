@@ -54,7 +54,21 @@ function onSubmit(event) {
     });
 }
 
-function onClick() {}
+function onClick() {
+  page += 1;
+  axiosAPI(name, page, perPage)
+    .then(({ data }) => {
+      createMarkup(data.hits);
+      console.log(data.hits);
+      simpleLightBox.refresh();
+      if (page * perPage >= data.totalHits) {
+        refs.loadBtn.style.display = 'none';
+      }
+    })
+    .catch(error => {
+      return 0;
+    });
+}
 
 function renderGallery(images) {
   return images
