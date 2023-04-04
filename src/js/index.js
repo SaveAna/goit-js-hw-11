@@ -1,5 +1,4 @@
 import '../css/styles.css';
-import debounce from 'lodash.debounce';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -64,6 +63,7 @@ function onClick() {
       if (page * perPage >= data.totalHits) {
         refs.loadBtn.style.display = 'none';
       }
+      smoothScroll();
     })
     .catch(error => {
       return 0;
@@ -84,7 +84,7 @@ function renderGallery(images) {
       }) => {
         return `<a class="gallery__link" href="${largeImageURL}">
              <div class="photo-card">
-                 <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+                 <img class="card-image" src="${webformatURL}" alt="${tags}" loading="lazy" />
                  <div class="info">
                      <p class="info-item">
                          <b>Likes</b>
